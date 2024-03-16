@@ -56,6 +56,84 @@
     <div id="content">
       
   
+    <article id="post-AI-basic-Knowledge" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2024/03/16/AI-basic-Knowledge/">AI basic: Knowledge</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2024-03-16T04:54:13.000Z" itemprop="datePublished">三月 16, 2024, 12:54 下午</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="Knowledge"><a href="#Knowledge" class="headerlink" title="Knowledge"></a>Knowledge</h1><p>与人类类似，AI也能通过现有知识“推理”出新的知识。</p>
+<p>如何将“知识”数据化存储到AI中?</p>
+<ul>
+<li><p>Sentence</p>
+<p>A sentence is an assertion about the world in a knowledge representation language. </p>
+<p>Example:</p>
+<p>SYSU is a college —&gt; <code>College(sysu)</code></p>
+<p>Timmy is a student in SYSU —&gt; <code>Student(timmy, sysu)</code></p>
+</li>
+</ul>
+<p>简单来说，AI基于“一阶逻辑”(First Order Logic)符号体系来对知识进行存储。</p>
+<blockquote>
+<p>一阶逻辑是一种形式系统，用符号来表示命题、谓词、量词和逻辑连接诸如与、或、非等。它包括一个语言部分，用于描述命题和量词的含义，以及一个推理规则部分，用于推断命题之间的关系。一阶逻辑通常被用来进行严格的数学和哲学推理。</p>
+</blockquote>
+<h1 id="Knowledge-Base"><a href="#Knowledge-Base" class="headerlink" title="Knowledge Base"></a>Knowledge Base</h1><p>Knowledge Base (知识库) 可以看成一个 Sentence 的集合。</p>
+<p>其中每个元素都是经过符号化处理后的 Sentence，代表我们已有的知识。在知识库的基础上，AI可以对新的知识进行推理。</p>
+<p>我们可以将知识推理看作一个搜索问题: 我们尝试从知识库<code>KB</code>中推理Sentence<code>α</code></p>
+<ul>
+<li>Initial State: <code>KB</code></li>
+<li>Actions: 各种推理规则</li>
+<li>Transition model: 经过推理加入新知识后的新的知识库</li>
+<li>Goal test: 判断我们询问的目标<code>α</code>是否存在于<code>KB</code>中。</li>
+<li>Path cost: 得到<code>α</code>的过程中推理的次数</li>
+</ul>
+<p>下面介绍两种最基本的推理算法: <em>Model Checking</em> 与 <em>Resolution</em></p>
+<h2 id="Model-Checking"><a href="#Model-Checking" class="headerlink" title="Model Checking"></a>Model Checking</h2><p>一言以蔽之，本算法通过“真值表”来直接实现推理。</p>
+<p>即遍历整个”真值表”，若<code>KB-&gt;α</code>是永真式，则表明我们可以从<code>KB</code>中推导出<code>α</code>；反之说明不能。</p>
+<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p><em>消解</em><br>本算法基与以下很好证明的却又没那么显而易见的推理规则:</p>
+<blockquote>
+<p>实质上是反证法: (<code>KB</code>⊨<code>α</code>) 与 (<code>KB</code>∧<code>¬α</code>) 是矛盾的。只要证明后者不成立(False),就能证明前者成立(True)</p>
+</blockquote>
+<p>$(P) ∧ (¬P) ⊨ () $</p>
+<p>$(P ∨ Q) ∧ (¬P) ⊨ Q$</p>
+<p>$(P ∨ Q) ∧ (¬P ∨ R) ⊨ (Q ∨ R)$ </p>
+<p>基本步骤如下:</p>
+<ol>
+<li>将 (<code>KB</code>∧<code>¬α</code>) 转换为合取范式</li>
+<li>遍历范式中的每个子句，不断尝试用 <em>消解规则</em> 产生新的子句<ol>
+<li>若产生的新子句是空子句<code>()</code>，说明(<code>KB</code>∧<code>¬α</code>)为假，进而表示 (<code>KB</code>⊨<code>α</code>)为真，即我们能从<code>KB</code>中推理出<code>α</code>。</li>
+<li>若无法继续产生新的子句，则说明我们不能从<code>KB</code>中推理出<code>α</code>。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
     <article id="post-一次突如其来的哭泣" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
