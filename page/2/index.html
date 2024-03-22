@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Whispers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image100hun-transparent-version.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta name="description" content="null">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Whispers">
+<meta property="og:url" content="https://baihyf.github.io/page/2/index.html">
+<meta property="og:site_name" content="Whispers">
+<meta property="og:description" content="null">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="BHYF">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Whispers</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      
+  
+    <article id="post-博客测试" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2023/08/26/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/">记录一下搭建过程的一些BUG</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2023-08-26T07:30:44.000Z" itemprop="datePublished">八月 26, 2023, 3:30 下午</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="在创建与配置本博客时遇到的一些问题与解决方案"><a href="#在创建与配置本博客时遇到的一些问题与解决方案" class="headerlink" title="在创建与配置本博客时遇到的一些问题与解决方案"></a>在创建与配置本博客时遇到的一些问题与解决方案</h1><p>2023-08-26</p>
+<p>遇到问题：更换volantic主题后上传不完全。</p>
+<p>Solution: 每次提交时用 hexo clean &amp;&amp; hexo deploy 先清除缓存。<br>但Edge浏览器刷新了很多次上传仍不完全，看了issue后换了Chorme试试，结果正常了。<br>访问建议开无痕模式。</p>
+<p>2023-09-07</p>
+<p>遇到问题：服务器上传文章时图片加载失败。我在本地的md文件渲染后能看到，但上传后LOCALHOST里都加载不出来。</p>
+<p>Solution: 将Github作为图床配合PicGo管理，将需要的图片上传到GitHub上，再在文章中进行引用。最终可以显示。</p>
+<p>2023-10-10</p>
+<p>遇到问题：无法更换封面</p>
+<p>Solution: 配置文件中 background 多缩进了一格，取消缩进后恢复正常</p>
+
+      
+    </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2023/08/25/hello-world/">Hello World</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2023-08-25T12:38:25.345Z" itemprop="datePublished">八月 25, 2023, 8:38 晚上</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav" class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">« Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>

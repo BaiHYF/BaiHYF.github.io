@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Whispers</title>
+  <title>AI basic Optimization | Whispers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -17,15 +17,21 @@
 <link rel="stylesheet" href="/css/highlight.css">
 
   
-  <meta name="description" content="null">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Whispers">
-<meta property="og:url" content="https://baihyf.github.io/index.html">
+  <meta name="description" content="Optimizationnote for Havard CS50.AI lecture 03 本节概述一些经典的算法。 他们被称为 “tools that we can use to solve an even broader range of problems” Local Search  Whereas in maze solving, for example, we wanted to fi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI basic Optimization">
+<meta property="og:url" content="https://baihyf.github.io/2024/03/21/AI-basic-Optimization/index.html">
 <meta property="og:site_name" content="Whispers">
-<meta property="og:description" content="null">
+<meta property="og:description" content="Optimizationnote for Havard CS50.AI lecture 03 本节概述一些经典的算法。 他们被称为 “tools that we can use to solve an even broader range of problems” Local Search  Whereas in maze solving, for example, we wanted to fi">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x02.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x03.png">
+<meta property="article:published_time" content="2024-03-21T01:40:35.000Z">
+<meta property="article:modified_time" content="2024-03-22T03:09:08.271Z">
 <meta property="article:author" content="BHYF">
-<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x01.png"><meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
   <div id="wrapper">
@@ -54,17 +60,14 @@
 </header>
 
     <div id="content">
-      
-  
-    <article id="post-AI-basic-Optimization" class="article article-type-post" itemprop="blogPost" itemscope>
+      <article id="post-AI-basic-Optimization" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/03/21/AI-basic-Optimization/">AI basic Optimization</a>
-      
+    <h2 class="article-title" itemprop="headline name">
+      AI basic Optimization
     </h2>
   
 
@@ -215,445 +218,38 @@
     </div>
     
     
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-AI-basic-Uncertainties" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/03/21/AI-basic-Uncertainties/">AI basic Uncertainties</a>
+    <div class="article-category">
       
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2024-03-21T01:21:46.000Z" itemprop="datePublished">三月 21, 2024, 9:21 上午</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+        <b>Categories:</b>
+        <a class="article-category-link" href="/categories/Knowledge/">Knowledge</a>
       
       
-        <h1 id="Uncertainties"><a href="#Uncertainties" class="headerlink" title="Uncertainties"></a>Uncertainties</h1><p><em>note for Havard CS50.AI lecture02</em></p>
-<p>Uncertainties,即不确定性，第一眼看到这个标题我并没能理解他的意思。学完后再回看，才了解，这一节包含了概率论的一些基本的内容。</p>
-<h2 id="Random-Variables"><a href="#Random-Variables" class="headerlink" title="Random Variables"></a>Random Variables</h2><p>这里讨论的是“离散型随机变量”</p>
-<p>For example, to represent the status of a flight, we can define a variable <em>Flight</em> that takes on the values <em>{on time, delayed, canceled}</em>.</p>
-<p>Often, we are interested in the probability with which each value occurs. We represent this using a <strong>probability distribution</strong>.</p>
-<ul>
-<li>P(<em>Flight &#x3D; on time</em>) &#x3D; 0.6</li>
-<li>P(<em>Flight &#x3D; delayed</em>) &#x3D; 0.3</li>
-<li>P(<em>Flight &#x3D; canceled</em>) &#x3D; 0.1</li>
-</ul>
-<p>Then this probability distribution can be represented more succinctly as a vector:</p>
-<ul>
-<li><strong>P</strong>(<em>Flight</em>) &#x3D; <em>&lt;0.6, 0.3, 0.1&gt;</em></li>
-</ul>
-<h3 id="Bayes’-Rule"><a href="#Bayes’-Rule" class="headerlink" title="Bayes’ Rule"></a>Bayes’ Rule</h3><p>Simply review it,</p>
-<ul>
-<li><em>P(b|a)&#x3D;P(b)P(a|b)&#x2F;P(a)</em><blockquote>
-<p> In words, Bayes’ rule says that the probability of b given a is equal to the probability of a given b, times the probability of b, divided by the probability of a.</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="Joint-Probability"><a href="#Joint-Probability" class="headerlink" title="Joint Probability"></a>Joint Probability</h3><p>Simply review it,</p>
-<ul>
-<li><em>P(b|a) &#x3D; P(a, b) &#x2F; P(a)</em> <blockquote>
-<p>In probability, commas and ∧ are used interchangeably.</p>
-</blockquote>
-</li>
-</ul>
-<p>If <em>P(a)</em> is viewed as a constant by which <em>P(a, b)</em> is multiplied, we can re write <em>P(b|a)</em> as <em>αP(a, b)</em>  </p>
-<h3 id="Marginalization"><a href="#Marginalization" class="headerlink" title="Marginalization"></a>Marginalization</h3><p>Simply review it,</p>
-<ul>
-<li><em>P(a) &#x3D; P(a, b) + P(a, ¬b)</em></li>
-</ul>
-<p>Or in a more general way:</p>
-<ul>
-<li>$P(X&#x3D;x_{i})&#x3D;\sum_{j}P(X&#x3D;x_{i}, Y&#x3D;y_{j})$</li>
-</ul>
-<h3 id="Conditioning"><a href="#Conditioning" class="headerlink" title="Conditioning"></a>Conditioning</h3><p>Simply review it,</p>
-<ul>
-<li><em>P(a) &#x3D; P(a | b)P(b) + P(a | ¬b)P(¬b)</em></li>
-</ul>
-<p>Or in a more general way:</p>
-<ul>
-<li>$P(X&#x3D;x_{i})&#x3D;\sum_{j}P(X&#x3D;x_{i}|Y&#x3D;y_{j})P(Y&#x3D;y_{j})$</li>
-</ul>
-<h2 id="Bayesian-Networks"><a href="#Bayesian-Networks" class="headerlink" title="Bayesian Networks"></a>Bayesian Networks</h2><p>A Bayesian network is a data structure that represents the dependencies among random variables. </p>
-<ul>
-<li>They are <strong>directed</strong> graphs. (<strong>DAG</strong>)</li>
-<li>Each node on the graph represent a <em>random variable</em>.</li>
-<li>An arrow from X to Y represents that X is a parent of Y. That is, the probability distribution of Y depends on the value of X.</li>
-<li>Each node X has probability distribution P(X | Parents(X)).</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x00.png" alt="Bayesian Network"></p>
-<blockquote>
-<p>一般而言，贝叶斯网络的有向无环图中的节点表示随机变量，它们可以是可观察到的变量，抑或是隐变量、未知参数等。连接两个节点的箭头代表此两个随机变量是具有因果关系或是非条件独立的；而两个节点间若没有箭头相互连接一起的情况就称其随机变量彼此间为条件独立。若两个节点间以一个单箭头连接在一起，表示其中一个节点是“因（parents）”，另一个是“果（descendants or children）”，两节点就会产生一个条件概率值。</p>
-</blockquote>
-<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><p>We can infer new information based on probabilities. While this does not allow us to know new information for certain, it allows us to figure out the probability distributions for some values.</p>
-<p>Inference has multiple properties:</p>
-<ul>
-<li>Query <strong>X</strong></li>
-<li>Evidence variables <strong>E</strong></li>
-<li>Hidden variables <strong>Y</strong></li>
-<li>Goal: <strong>P(X|e)</strong><blockquote>
-<p>Namely, to compute the probability distribution of X based on evidence e.</p>
-</blockquote>
-</li>
-</ul>
-<p>There is an algorithm to compute this by enumberation:</p>
-<ul>
-<li>$P(X|e) &#x3D; αP(X,e) &#x3D; α \sum_{y} P(X,e,y)$ <blockquote>
-<p>X : query variable ; e : observed evidence,<br>y : hidden variables</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Markov-Model"><a href="#Markov-Model" class="headerlink" title="Markov Model"></a>Markov Model</h2><p>First we look at an assumption. Then how the model works.</p>
-<h3 id="Markov-Assumption"><a href="#Markov-Assumption" class="headerlink" title="Markov Assumption"></a>Markov Assumption</h3><p>The current state depends on only a finite fixed number of previous states.</p>
-<h2 id="Markov-Chain"><a href="#Markov-Chain" class="headerlink" title="Markov Chain"></a>Markov Chain</h2><p>A Markov chain is a sequence of random variables where the distribution of each variable follows the Markov assumption. That is, each event in the chain occurs based on the probability of the event before it.</p>
-<blockquote>
-<p>从一天下雨或晴天开始，然后根据今天天气晴朗或下雨的概率对第二天天气的状况进行预测。然后，根据明天的天气条件确定后天各个天气的概率，依此类推……</p>
-</blockquote>
-
       
     </div>
-    
     
     
   </div>
 </article>
 
-
-
   
-    <article id="post-BookReview0x00-祈念守护人" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2024/03/21/AI-basic-Uncertainties/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
         
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/03/18/BookReview0x00-%E7%A5%88%E5%BF%B5%E5%AE%88%E6%8A%A4%E4%BA%BA/">BookReview0x00 祈念守护人</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2024-03-18T14:29:59.000Z" itemprop="datePublished">三月 18, 2024, 10:29 晚上</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        仅仅是想留下些什么，证明我看过这书
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2024/03/18/BookReview0x00-%E7%A5%88%E5%BF%B5%E5%AE%88%E6%8A%A4%E4%BA%BA/#more">read more</a>
+          AI basic Uncertainties
+        
       </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
+    </a>
   
-    <article id="post-AI-basic-Search" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/03/16/AI-basic-Search/">AI basic: Search</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2024-03-16T05:18:38.000Z" itemprop="datePublished">三月 16, 2024, 1:18 下午</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        也许人工智能这个称呼，就源于人们初次将人脑无法轻易解决的问题放入黑盒中并得到了想要的结果时的赞叹。
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2024/03/16/AI-basic-Search/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
+</nav>
 
 
 
-  
-    <article id="post-AI-basic-Knowledge" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/03/16/AI-basic-Knowledge/">AI basic: Knowledge</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2024-03-16T04:54:13.000Z" itemprop="datePublished">三月 16, 2024, 12:54 下午</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        A breif note.
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2024/03/16/AI-basic-Knowledge/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-一次突如其来的哭泣" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2023/10/08/%E4%B8%80%E6%AC%A1%E7%AA%81%E5%A6%82%E5%85%B6%E6%9D%A5%E7%9A%84%E5%93%AD%E6%B3%A3/">一次突如其来的哭泣</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2023-10-08T13:37:51.000Z" itemprop="datePublished">十月 8, 2023, 9:37 晚上</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        突然就哭了。
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2023/10/08/%E4%B8%80%E6%AC%A1%E7%AA%81%E5%A6%82%E5%85%B6%E6%9D%A5%E7%9A%84%E5%93%AD%E6%B3%A3/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-20岁" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2023/09/16/20%E5%B2%81/">20岁</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2023-09-16T13:57:42.000Z" itemprop="datePublished">九月 16, 2023, 9:57 晚上</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        生日
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2023/09/16/20%E5%B2%81/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-pictureTest" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2023/09/12/pictureTest/">pictureTest</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2023-09-12T07:33:05.000Z" itemprop="datePublished">九月 12, 2023, 3:33 下午</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <img src="/.io//09/12/pictureTest/wallhaven-r7dmm1.jpg" class title="nonono">
-
-<p><img src="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/imagewallhaven-r7dmm1.jpg" alt="test"></p>
-
-      
-    </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-开学前一晚的碎碎念" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2023/08/27/%E5%BC%80%E5%AD%A6%E5%89%8D%E4%B8%80%E6%99%9A%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">开学前一晚的碎碎念</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2023-08-27T14:05:04.000Z" itemprop="datePublished">八月 27, 2023, 10:05 晚上</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        又要开学了
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2023/08/27/%E5%BC%80%E5%AD%A6%E5%89%8D%E4%B8%80%E6%99%9A%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-入东校有感" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2023/08/27/%E5%85%A5%E4%B8%9C%E6%A0%A1%E6%9C%89%E6%84%9F/">入东校有感</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2023-08-27T02:02:55.000Z" itemprop="datePublished">八月 27, 2023, 10:02 上午</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        “孤"与“独”
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2023/08/27/%E5%85%A5%E4%B8%9C%E6%A0%A1%E6%9C%89%E6%84%9F/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav" class="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
-  </nav>
 
 
 

@@ -24,10 +24,12 @@
 <meta property="og:site_name" content="Whispers">
 <meta property="og:description" content="也许人工智能这个称呼，就源于人们初次将人脑无法轻易解决的问题放入黑盒中并得到了想要的结果时的赞叹。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x04.png">
 <meta property="article:published_time" content="2024-03-16T05:18:38.000Z">
-<meta property="article:modified_time" content="2024-03-16T05:22:42.183Z">
+<meta property="article:modified_time" content="2024-03-22T00:44:15.632Z">
 <meta property="article:author" content="BHYF">
-<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x04.png"><meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
   <div id="wrapper">
@@ -80,9 +82,11 @@
       
         <p><em>note for Havard CS50.AI lecture0</em></p>
 <h1 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h1><p>搜索，指广义的”为问题搜索一个答案”，也许这是最原始以及最直观，最广义的 Artificial Intelligence。</p>
-<h2 id="Build-a-Model-for-Search"><a href="#Build-a-Model-for-Search" class="headerlink" title="Build a Model for Search"></a>Build a Model for Search</h2><ul>
+<h2 id="Build-a-Model-for-Search"><a href="#Build-a-Model-for-Search" class="headerlink" title="Build a Model for Search"></a>Build a Model for Search</h2><p><em>The Formalism</em></p>
+<ul>
 <li><p><strong>Agent</strong></p>
 <p>  An entity that perceives its environment and acts upon that environment.</p>
+<p>  <em>sysu的陈川老师将之翻译为“智能体”</em></p>
 </li>
 <li><p><strong>State</strong></p>
 <p>  A configuration of an agent in its environment. </p>
@@ -109,7 +113,7 @@
 <p>  Path is a sequence of Actions </p>
 </li>
 <li><p><strong>Solution</strong></p>
-<p>  A sequence of actions that leads from the initial state to the goal state.</p>
+<p>  <strong>A sequence of actions</strong> that leads from the initial state to the goal state.</p>
 <ul>
 <li><p><strong>Optimal Solution</strong></p>
 <p>  A solution that has the lowest path cost among all solutions</p>
@@ -147,6 +151,10 @@
 </ul>
 </li>
 <li><em>Remove</em> a node $n$ from the frontier, which is the node to be considered this turn.</li>
+<li>If $n$ in explored set<ul>
+<li>Continue</li>
+</ul>
+</li>
 <li>If $n$ contains the goal state:<ul>
 <li><em>Return</em> the solution, and stop.</li>
 </ul>
@@ -159,6 +167,9 @@
 </ol>
 </li>
 </ul>
+<p>or we could express this recursively, as one called “tree search”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fn TreeSearch(Frontier, Sucessors, Goal?) &#123;</span><br><span class="line">    If Frontier is empty: return failure</span><br><span class="line"></span><br><span class="line">    let CurrState = select a state from Frontier</span><br><span class="line"></span><br><span class="line">    If Goal?(CurrState) return CurrState</span><br><span class="line"></span><br><span class="line">    let Frontier&#x27; = (Frontier - CurrState) or Sucessors(CurrState)</span><br><span class="line"></span><br><span class="line">    return TreeSearch(Frontier&#x27;, Sucessors, Goal?)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>This is the basic model how we search in a machine.</p>
 <h2 id="Classic-Search-Technique-Depth-First-Search"><a href="#Classic-Search-Technique-Depth-First-Search" class="headerlink" title="Classic Search Technique: Depth First Search"></a>Classic Search Technique: Depth First Search</h2><p>A <em>depth-first search</em> algorithm exhausts each one direction before trying another direction. In these cases, the frontier is managed as a <em>stack</em> data structure. </p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27; DFS: Removes a node from the frontier and returns it.&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">remove</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># Terminate the search if the frontier is empty, because this means that there is no solution.</span></span><br><span class="line">    <span class="keyword">if</span> self.empty():</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&quot;Empty frontier&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        node = self.frontier[-<span class="number">1</span>]  <span class="comment"># Save the last item in the list (which is the newest node added)</span></span><br><span class="line">        self.frontier = self.frontier[:-<span class="number">1</span>]  <span class="comment"># Save all the items on the list besides the last node (i.e. removing the last node)</span></span><br><span class="line">        <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
@@ -167,29 +178,43 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27; BFS: Removes a node from the frontier and returns it. &#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">remove</span>(<span class="params">self</span>):</span><br><span class="line">	<span class="comment"># Terminate the search if the frontier is empty, because this means that there is no solution.</span></span><br><span class="line">    <span class="keyword">if</span> self.empty():</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&quot;empty frontier&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># Save the oldest item on the list (which was the first one to be added)</span></span><br><span class="line">        node = self.frontier[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># Save all the items on the list besides the first one (i.e. removing the first node)</span></span><br><span class="line">        self.frontier = self.frontier[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
 
 <h2 id="Advanced-Techinique-Greedy-Best-First-Search-and-A-Search"><a href="#Advanced-Techinique-Greedy-Best-First-Search-and-A-Search" class="headerlink" title="Advanced Techinique: Greedy Best-First Search and A* Search"></a>Advanced Techinique: Greedy Best-First Search and A* Search</h2><h3 id="Greedy-Best-First-Search"><a href="#Greedy-Best-First-Search" class="headerlink" title="Greedy Best-First Search"></a>Greedy Best-First Search</h3><p><em>Greedy best-first search</em> expands the node that is the closest to the goal, as determined by a heuristic function $h(n)$.</p>
+<p><em>这是一种只考虑启发式函数进行搜索的策略</em></p>
 <ul>
 <li><p>heuristic function 启发式算法</p>
-<p>  所谓的最短路径问题有很多种意思，在这里启发式指的是在一个搜索树的节点上定义的函数 $h(n)$，用于评估从此节点到目标节点成本最小的路径，通俗的说，就是通过这个函数 <strong>估算</strong> 当前节点与目标节点的距离。[1] (e.g. $h(n)&#x3D;$ 当前节点与目标节点的 <em>曼哈顿路径</em> )</p>
+<p>  所谓的最短路径问题有很多种意思，在这里启发式指的是在一个搜索树的节点上定义的函数 $h(n)$，用于评估从此节点到目标节点成本最小的路径，通俗的说，就是通过这个函数 <strong>估算</strong> 当前节点与目标节点的距离。[1] (e.g. $h(n)&#x3D;$ 当前节点与目标节点的 <em>曼哈顿路径</em> )<br>  <em>或者说，当前状态与目标状态的接近程度</em></p>
+<p>  对所有满足要求的目标节点 n, h(n) &#x3D; 0</p>
 <p>  注意, $h(n)$ 是有可能出错的，后果就是使得搜索的速度下降.</p>
 </li>
 </ul>
 <hr>
 <p>[^1]<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Heuristic_(computer_science)">维基百科:启发式算法</a>    </p>
 <h3 id="A-Search"><a href="#A-Search" class="headerlink" title="A* Search"></a>A* Search</h3><p>A development of the greedy best-first algorithm, <em>A* search</em> considers not only $h(n)$, the estimated cost from the current location to the goal, but also $g(n)$, the cost that was accrued until the current location(from the initial location). </p>
-<p>$g(n)&#x3D;$起点到顶点n的 <strong>实际</strong> 距离</p>
+<ul>
+<li>g(n) is the cost of the path to n</li>
+<li>h(n) is the heuristic estimate of the cost of getting to a goal node from n</li>
+<li>We use f(n) to order the nodes on the frontier. Always expand the node with lowest f-value on Frontier.</li>
+</ul>
+<blockquote>
+<p>$g(n)&#x3D;$起点到顶点n的 <strong>实际</strong> 距离(花销)</p>
+</blockquote>
 <p>即每一步都选取 $f(n)&#x3D;h(n)+g(n)$ 最小的相邻节点。同时我们会规定一个 cost limit， 当 $f(n)$ 超过这个值后，回退一步。（这是为了在一定程度上避免$h(n)$犯错）</p>
 <p>为了保证一定能得到最优解 (optimal), $h(n)$ 需满足以下条件:</p>
 <ol>
 <li><p>Admissible:<br> 对所有节点 $n$</p>
-<p> $h(n)&lt;&#x3D;n到目标节点的实际最短路径$ </p>
+<p> h(n)&lt;&#x3D;n 到目标节点的实际最短路径 </p>
 <p> (可以结合 Dijkstra Algorithm)</p>
 </li>
-<li><p>Consistent：(单调性)</p>
+<li><p>Consistent：(单调性&#x2F;一致性)</p>
 <p> 对所有节点 $n$ 与其后继节点 $n’$, 从 $n$ 到 $n’$ 的花销 $c$</p>
 <p> $h(n)&lt;&#x3D;h(n’)+c$</p>
+<p> 更易懂的说:</p>
+<p> 对任意节点 n1, n2: h(n1) &lt;&#x3D; c(n1 -&gt; n2) + h(n2)<br> <img src="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x04.png"></p>
 <p> 这个条件确保了A算法在搜索过程中是渐进递减的，不会在路径搜索中发生大幅度的跳跃。</p>
 </li>
 </ol>
+<blockquote>
+<p>Consistent contains Admissible</p>
+</blockquote>
 <h2 id="Adversarial-Search"><a href="#Adversarial-Search" class="headerlink" title="Adversarial Search"></a>Adversarial Search</h2><p>In <em>adversarial search</em> the algorithm faces an opponent that tries to achieve the opposite goal. Often, AI that uses adversarial search is encountered in games, such as tic tac toe.</p>
 <h3 id="Minimax"><a href="#Minimax" class="headerlink" title="Minimax"></a>Minimax</h3><p><em>Minimax</em> 算法常用于棋类等由两方较量的游戏和程序。该算法是一个零和博弈算法，即一方要在可选的选项中选择将其优势最大化的选择，另一方则选择令对手优势最小化的方法。而开始的时候总和为0。很多棋类游戏可以采取此算法，例如井字棋（tic-tac-toe）。</p>
 <p><strong>MODEL: A Tic-Tac-Toe AI:</strong></p>
