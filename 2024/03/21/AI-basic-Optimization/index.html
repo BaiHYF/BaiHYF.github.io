@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x02.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x03.png">
 <meta property="article:published_time" content="2024-03-21T01:40:35.000Z">
-<meta property="article:modified_time" content="2024-03-25T03:55:39.047Z">
+<meta property="article:modified_time" content="2024-03-26T08:17:33.913Z">
 <meta property="article:author" content="BHYF">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/BaiHYF/blog_image@main/image0x01.png"><meta name="generator" content="Hexo 6.3.0"></head>
@@ -181,8 +181,9 @@
 <p>最高效的办法是使用大佬们编好的库。(我认为，大多数情况下(非科研)，造轮子是效率最低的做法)</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.optimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># Objective Function: 50x_1 + 80x_2</span></span><br><span class="line"><span class="comment"># Constraint 1: 5x_1 + 2x_2 &lt;= 20</span></span><br><span class="line"><span class="comment"># Constraint 2: -10x_1 + -12x_2 &lt;= -90</span></span><br><span class="line"></span><br><span class="line">result = scipy.optimize.linprog(</span><br><span class="line">    [<span class="number">50</span>, <span class="number">80</span>],  <span class="comment"># Cost function: 50x_1 + 80x_2</span></span><br><span class="line">    A_ub=[[<span class="number">5</span>, <span class="number">2</span>], [-<span class="number">10</span>, -<span class="number">12</span>]],  <span class="comment"># Coefficients for inequalities</span></span><br><span class="line">    <span class="comment"># 第一行表示约束条件 1 中 x_1 和 x_2 的系数</span></span><br><span class="line">    <span class="comment"># 第二行表示约束条件 2 中 x_1 和 x_2 的系数</span></span><br><span class="line">    b_ub=[<span class="number">20</span>, -<span class="number">90</span>],  <span class="comment"># Constraints for inequalities: 20 and -90</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> result.success:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;X1: <span class="subst">&#123;<span class="built_in">round</span>(result.x[<span class="number">0</span>], <span class="number">2</span>)&#125;</span> hours&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;X2: <span class="subst">&#123;<span class="built_in">round</span>(result.x[<span class="number">1</span>], <span class="number">2</span>)&#125;</span> hours&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No solution&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<h2 id="Constraint-Satisfaction-Problem-CSP"><a href="#Constraint-Satisfaction-Problem-CSP" class="headerlink" title="Constraint Satisfaction Problem (CSP)"></a>Constraint Satisfaction Problem (CSP)</h2><p><em>约束满足问题</em></p>
+<h2 id="Constraint-Satisfaction-Problem-CSP"><a href="#Constraint-Satisfaction-Problem-CSP" class="headerlink" title="Constraint Satisfaction Problem (CSP)"></a>Constraint Satisfaction Problem (CSP)</h2><p><em>约束满足问题，这也是本节的重点，对应的project就是做这个</em></p>
 <p>A class of problems where variables need to be assigned values while satisfying some conditions.</p>
+<p>一些基本概念</p>
 <ul>
 <li>Set of variables (x₁, x₂, …, xₙ)</li>
 <li>Set of domains for each variable {D₁, D₂, …, Dₙ}</li>
@@ -210,9 +211,136 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="Node-Consistency"><a href="#Node-Consistency" class="headerlink" title="Node Consistency"></a>Node Consistency</h3><p><em>点一致</em></p>
-<h3 id="Arc-Consistency"><a href="#Arc-Consistency" class="headerlink" title="Arc Consistency"></a>Arc Consistency</h3><p><em>弧一致</em></p>
-<h2 id="Backtracking-Search"><a href="#Backtracking-Search" class="headerlink" title="Backtracking Search"></a>Backtracking Search</h2><p><em>回溯搜索</em></p>
+<p>由于我的表达能力有限，接下来将通过一个 <del>(很抽象的)</del> 例子来说明 CSP 问题的一般求解模式。</p>
+<ul>
+<li><p>Model the Question</p>
+<p>我们要在给定的 <em>variables</em>, <em>domains</em> 与 <em>constaints</em> 的基础上，求出一个 <em>assignments</em></p>
+<ul>
+<li><em>variables</em> &#x3D; (x₁, x₂, …, xₙ)</li>
+<li><em>domains</em> &#x3D; {D₁, D₂, …, Dₙ}, where Dᵢ &#x3D; {v₁, v₂, …, vₙ}</li>
+<li><em>constraints</em> &#x3D; {C₁, C₂, …, Cₙ} </li>
+<li><em>assignments</em> &#x3D; {x₁&#x3D;v₁, x₂&#x3D;v₂, …, xₙ&#x3D;vₙ}<blockquote>
+<p>也就是要找出一个满足所有约束条件的解</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Enforce Node Consistency</p>
+<p>使得一个变量“点相容”的基本方法:将该变量域中所有不符合一元约束的值删除  </p>
+<p>&ensp;</p>
+<p>function <strong>Enforce_Node_Consistency</strong>(<em>csp</em>, <em>var</em>):</p>
+<ul>
+<li>for <em>val</em> in <em>var’s domain</em>:<ul>
+<li>if <em>val</em>  don’t satisfy unary constraints for <em>var</em>:<ul>
+<li>remove <em>val</em> from <em>var’s domain</em><blockquote>
+<p>enforce node consistency for variable <em>var</em></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Enforce Arc Consistency</p>
+<p>先来看最基本的，使得两个变量弧相容的方法: 将 X 域中“不可能”与 Y 相容的值删除</p>
+<p>&ensp;</p>
+<p>&ensp;</p>
+<p>function <strong>Revise</strong>(<em>csp</em>, <em>X:variable</em>, <em>Y:variable</em>):</p>
+<ul>
+<li><em>revised</em> &#x3D; <em>false</em></li>
+<li>for <em>x</em> in <em>X’s domain</em>:<ul>
+<li>if no <em>y</em> in <em>Y’s domain</em> satisfies binary constraint for (<em>X</em>, <em>Y</em>):<ul>
+<li>remove <em>x</em> from <em>X’s domain</em></li>
+<li><em>revised</em> &#x3D; <em>true</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return <em>revised</em><blockquote>
+<p>enforce arc consistency for variable X and variable Y</p>
+</blockquote>
+</li>
+</ul>
+<p>Q: 为什么这函数要返回一个布尔值?</p>
+<p>A: 返回值代表这条弧是否被修改过，是为了方便实现后面的 ac-3 函数。</p>
+<p>&ensp;</p>
+<p>&ensp;</p>
+<p>在这个算法的基础上，我们尝试使得 <em>csp</em> 中所有的弧都满足二元约束.</p>
+<p>这就是著名的 AC-3 算法</p>
+<blockquote>
+<p>传说，…</p>
+</blockquote>
+<p>function <strong>AC-3</strong>(<em>csp</em>):</p>
+<ul>
+<li><em>q</em> &#x3D; <strong>Queue</strong>(all <em>arcs</em> in <em>csp</em>)</li>
+<li>while <em>q</em> is not empty:<ul>
+<li>(<em>X</em>, <em>Y</em>) &#x3D; <em>q</em>.pop()</li>
+<li>if <strong>Revise</strong>(<em>csp</em>, <em>X</em>, <em>Y</em>): <ul>
+<li>if size of <em>X’s domain</em> &#x3D;&#x3D; 0:<ul>
+<li>return <em>false</em></li>
+</ul>
+</li>
+<li>for <em>Z</em> in <em>X’s neighbors except Y</em>:<ul>
+<li><em>q</em>.push((<em>Z</em>, <em>X</em>))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return <em>True</em><blockquote>
+<p>简单地尝试遍历所有的弧。但如果某个变量的域被修改过，那么与之连结的弧都要重新check一次<br>返回 false 代表这个 csp 问题无解</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Backtrack Search</p>
+<blockquote>
+<p>广义地讲，所有包含“回退(backtrack)”这一步的算法都能叫回溯搜索，比如DFS.</p>
+</blockquote>
+<p>Backtrack Search是递归思想(recursion)的经典应用，在csp问题中，这也许不是效率最高的，但应该是最好理解的.</p>
+<p>&ensp;</p>
+<p>function <strong>Backtrack</strong>(<em>csp</em>, <em>assignment</em>):</p>
+<ul>
+<li>if <em>assignment</em> is complete:<ul>
+<li>return <em>assignment</em></li>
+</ul>
+</li>
+<li><em>var</em> &#x3D; <strong>Select-Unassigned-Var</strong>(<em>csp</em>, <em>assignment</em>)</li>
+<li>for <em>val</em> in <em>var’s domain</em>:<ul>
+<li>if {<em>var</em>&#x3D;<em>val</em>} is consistent with <em>assignment</em>:<ul>
+<li>add {<em>var</em>&#x3D;<em>val</em>} to <em>assignment</em></li>
+<li><em>result</em> &#x3D; <strong>Backtrack</strong>(<em>csp</em>, <em>assignment</em>)</li>
+<li>if <em>result</em> !&#x3D; <em>failure</em>:<ul>
+<li>return <em>result</em></li>
+</ul>
+</li>
+<li>else:<ul>
+<li>remove {<em>var</em>&#x3D;<em>val</em>} from <em>assignment</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return <em>failure</em></li>
+</ul>
+</li>
+<li><p>Solution</p>
+<p>在上文的基础上，我们可以得到 csp 问题的一种解法.</p>
+<p>&ensp;</p>
+<p>function <strong>Solution</strong>(<em>csp</em>):</p>
+<ol>
+<li>for <em>var</em> in <em>csp.varaibles</em>:<br>- <strong>Enforce_Node_Consistency</strong>(<em>csp</em>, <em>var</em>):</li>
+<li><strong>AC-3</strong>(<em>csp</em>)</li>
+<li><pre><code>- let _assignment_ = empty dictionary
+- return __Backtrack__(_csp_, _assignment_)
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
